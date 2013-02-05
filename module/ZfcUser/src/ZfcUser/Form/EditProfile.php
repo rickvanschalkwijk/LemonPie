@@ -113,8 +113,6 @@ class EditProfile extends ProvidesEventsForm
         				),
         		),
         ));
-        
-
         $this->getEventManager()->trigger('init', $this);
     }
 
