@@ -1,0 +1,38 @@
+<h1>Edit Profile</h1>
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action', $this->url('user/edit'));
+$form->setAttribute('method', 'post');
+$form->setAttribute('class','form-horizontal');
+?>
+
+<?php echo $this->form()->openTag($form) ?>
+	<fieldset>
+		<div class="control-group">
+   			<?=$this->formRow($form->get('username'));?>
+   		</div>
+   		<div class="control-group">
+   			<?=$this->formRow($form->get('surname'));?>
+   		</div>
+   		<div class="control-group">
+   			<?=$this->formRow($form->get('lastname'));?>
+   		</div>
+   		<hr />
+   		<div class="control-group">
+   			 <?=$this->formRow($form->get('email'));?>
+   		</div>
+   		<div class="control-group">
+   			<?=$this->formRow($form->get('emailVerify'));?>
+   		</div>
+   		<div class="control-group">
+			<?=$this->formRow($form->get('credential'));?>
+		</div>
+		<div class="control-group">
+			<?=$this->formRow($form->get('profilePicture'));?>
+		</div>
+	</fieldset>
+        <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+        
+<?php echo $this->form()->closeTag() ?>
