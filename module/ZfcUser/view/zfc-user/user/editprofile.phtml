@@ -1,4 +1,4 @@
-<h1>Edit Profile</h1>
+
 <?php
 $form = $this->form;
 $form->prepare();
@@ -9,6 +9,7 @@ $form->setAttribute('class','form-horizontal');
 
 <?php echo $this->form()->openTag($form) ?>
 	<fieldset>
+		<legend>Edit Profile</legend>
 		<div class="control-group">
    			<?=$this->formRow($form->get('username'));?>
    		</div>

@@ -143,6 +143,22 @@ class User extends EventProvider implements ServiceManagerAwareInterface
 
         return true;
     }
+    
+    public function editProfile(array $data){
+    	$currentUser = $this->getAuthService()->getIdentity();
+    	var_dump($currentUser);
+    	exit();
+    	$bcrypt = new Bcrypt;
+    	$bcrypt->setCost($this->getOptions()->getPasswordCost());
+    	
+    	if (!$bcrypt->verify($data['credential'], $currentUser->getPassword())) {
+    		return false;
+    	}
+    	
+    	$this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $currentUser));
+    	$this->getUserMapper()->update($currentUser);
+    	$this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $currentUser));
+    }
 
     /**
      * getUserMapper

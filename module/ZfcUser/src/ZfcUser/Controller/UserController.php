@@ -321,14 +321,32 @@ class UserController extends AbstractActionController
     		return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
     	}
     	
-    	if($this->getRequest()->isPost()){
-    		var_dump("SEND");
-    		exit();
+    	$id = (int) $this->zfcUserAuthentication()->getIdentity()->getId();
+    	
+    	if(!$id){
+    		return $this->redirect()->toRoute('index', 
+    					array('action' => 'index'
+    				));
     	}
     	
     	$form = $this->getEditProfileForm();
     	
-    	return array('form' => $form);
+    	$prg = $this->prg('user/editprofile');
+    	if ($prg instanceof Response) {
+    		return $prg;
+    	} elseif ($prg === false) {
+    		$data = array('username' => 'Rick');
+    		$form->populateValues($data);
+    		return array(
+    				'status' => $status,
+    				'form' => $form,
+    		);
+    	}
+		$this->getUserService()->editProfile($prg);    	
+    	
+    	
+    	//$form->populateValues($data);
+   
     }
 
     /**
