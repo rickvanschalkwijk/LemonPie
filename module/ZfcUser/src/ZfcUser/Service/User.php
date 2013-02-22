@@ -146,8 +146,6 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     
     public function editProfile(array $data){
     	$currentUser = $this->getAuthService()->getIdentity();
-    	var_dump($currentUser);
-    	exit();
     	$bcrypt = new Bcrypt;
     	$bcrypt->setCost($this->getOptions()->getPasswordCost());
     	
@@ -159,6 +157,11 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     	$this->getUserMapper()->update($currentUser);
     	$this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('user' => $currentUser));
     }
+    
+    public function getUser($id){
+    	$user = $this->getUserMapper()->findById($id);
+    	return $user;
+    } 
 
     /**
      * getUserMapper

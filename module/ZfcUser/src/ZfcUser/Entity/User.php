@@ -121,7 +121,43 @@ class User implements UserInterface
         $this->displayName = $displayName;
         return $this;
     }
-
+    
+    /**
+     * Get surName
+     * @return string
+     */
+    public function getSurname() {
+    	return $this->surName;
+    }
+    
+    /**
+     * Set surName
+     * @param string $surName
+     * @return UserInterface
+     */
+    public function setSurname($surName) {
+    	$this->surName = $surName;
+    	return $this;
+    }
+	
+    /**
+     * Get lastName
+     * @return string
+     */
+    public function getLastname() {
+    	return $this->lastName;
+    }
+    
+    /**
+     * Set lastName
+     * @param string $lastName
+     * @return \ZfcUser\Entity\User
+     */
+    public function setLastname($lastName) {
+    	$this->lastName = $lastName;
+    	return $this;
+    }
+    
     /**
      * Get password.
      *

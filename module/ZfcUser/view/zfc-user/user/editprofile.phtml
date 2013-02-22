@@ -32,6 +32,7 @@ $form->setAttribute('class','form-horizontal');
 		<div class="control-group">
 			<?=$this->formRow($form->get('profilePicture'));?>
 		</div>
+		<hr />
 	</fieldset>
         <input type="hidden" name="redirect" value="<?php echo $this->redirect ?>" />
         <?php echo $this->formSubmit($form->get('submit')); ?>
