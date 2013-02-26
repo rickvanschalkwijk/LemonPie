@@ -29,13 +29,23 @@ return array(
 								),
 								'may_terminate' => true,
 								'child_routes' => array(
-										'login' => array(
+										'add' => array(
 												'type' => 'Literal',
 												'options' => array(
 														'route' => '/add',
 														'defaults' => array(
 																'controller' => 'lpbug',
 																'action'     => 'add',
+														),
+												),
+										),
+										'own' => array(
+												'type' => 'Literal',
+												'options' => array(
+														'route' => '/own',
+														'defaults' => array(
+																'controller' => 'lpbug',
+																'action'     => 'userbugs',
 														),
 												),
 										),
