@@ -16,6 +16,12 @@ local.properties
 .settings/
 .loadpath
 
+# Zend Studio files #
+#####################
+.buildpath
+.project
+.settings*
+
 # External tool builders
 .externalToolBuilders/
 
