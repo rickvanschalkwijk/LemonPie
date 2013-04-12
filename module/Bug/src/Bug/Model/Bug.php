@@ -1,7 +1,12 @@
 <?php
 namespace Bug\Model;
 
-class Bug {
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+class Bug implements InputFilterAwareInterface{
 	public $id;
 	public $name;
 	public $description;
@@ -16,6 +21,7 @@ class Bug {
 	public $operatingSystem;
 	public $summery;
 	public $files;
+	protected $inputFilter;
 	
 	/*
 	 * 
@@ -37,6 +43,62 @@ class Bug {
 		$this->files			=	(isset($data['files'])) ? $data['files'] : null;
 	}
 	
+	public function setInputFilter(InputFilterInterface $inputFilter){
+		throw new \Exception("Not Used");
+	}
+	
+	public function getInputFilter(){
+		if(!$this->inputFilter){
+			$inputFilter = new InputFilter();
+			$factory	=	new InputFactory();
+
+			$inputFilter->add($factory->createInput(array(
+					'name'     => 'id',
+					'required' => true,
+					'filters'  => array(
+							array('name' => 'Int'),
+					),
+			)));
+			$inputFilter->add($factory->createInput(array(
+					'name'     => 'name',
+					'required' => true,
+					'filters'  => array(
+							array('name' => 'StripTags'),
+							array('name' => 'StringTrim'),
+					),
+					'validators' => array(
+							array(
+									'name'    => 'StringLength',
+									'options' => array(
+											'encoding' => 'UTF-8',
+											'min'      => 1,
+											'max'      => 200,
+									),
+							),
+					),
+			)));
+			$inputFilter->add($factory->createInput(array(
+					'name'     => 'description',
+					'required' => true,
+					'filters'  => array(
+							array('name' => 'StripTags'),
+							array('name' => 'StringTrim'),
+					),
+					'validators' => array(
+							array(
+									'name'    => 'StringLength',
+									'options' => array(
+											'encoding' => 'UTF-8',
+											'min'      => 1,
+											'max'      => 500,
+									),
+							),
+					),
+			)));
+			$this->inputFilter = $inputFilter;
+		}
+		return $this->inputFilter;
+	}
 	/**
 	 * @return the $id
 	 */
