@@ -15,8 +15,10 @@ class Login extends ProvidesEventsForm{
     protected $authOptions;
 
     public function __construct($name = null, AuthenticationOptionsInterface $options){
-        $this->setAuthenticationOptions($options);
+    	$this->setAttribute('class', 'form-signin');
+    	$this->setAuthenticationOptions($options);
         parent::__construct($name);
+    
 
         $this->add(array(
             'name' => 'identity',
@@ -60,6 +62,7 @@ class Login extends ProvidesEventsForm{
             ->setLabel('Sign In')
             ->setAttributes(array(
                 'type'  => 'submit',
+            		'class' => 'btn btn-warning'
             ));
 
         $this->add($submitElement, array(

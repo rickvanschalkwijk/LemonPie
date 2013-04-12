@@ -1,7 +1,72 @@
+/*!
+ * LemonPie Style v0.0.1
+ *
+ * Copyright 2012 LemonPie, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
 body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
+
+/*
+ * Begin Login
+ */
+.form-signin img{
+	display:block;
+	margin:auto;
+}
+
+.form-signin h1{
+	text-align: center;
+}
+
+.zend_form ul li{
+	color:#b94a48;
+	list-style: none;
+	text-align: center;
+}
+
+.zend_form label{
+	text-align: center;
+}
+
+.zend_form input[type="text"], input[type="password"], button[type="submit"]{
+	display:block;
+	margin:auto;
+}
+
+/*
+ * End Login 
+ */
+
+/*
+* Begin main menu
+*/
+
+/*
+* End main menu
+*/
+
+/*
+ * Begin edit profile
+ */
+.control-group{
+	width:35%;
+}
+
+.control-group label span{
+	float:left;
+}
+
+.control-group label input{
+	float:right;
+}
+/*
+ * End edit profile
+ */
 
 .zf-green {
     color: #68b604;
@@ -34,3 +99,5 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+
