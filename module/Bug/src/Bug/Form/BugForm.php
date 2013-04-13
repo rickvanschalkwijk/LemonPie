@@ -10,20 +10,22 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 	protected $serviceManager;
 	
 	public function __construct($name = null){
-		
+		$this->setServiceManager($this->serviceManager = new ServiceManager());
 		parent::__construct('bug');
 		$this->setAttribute('method', 'post');
 		
 		$this->add(array(
 				'name' => 'id',
-				'attribites' => array(
+				'attributes' => array(
 					'type' => 'hidden'
 				),
 		));
 		$this->add(array(
 				'name' => 'name',
-				'attribites' => array(
-					'type' => 'text'
+				'attributes' => array(
+					'type' => 'text',
+					'required' => 'required',
+					'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
 				),
 				'options' => array(
 					'label' => 'Name'
@@ -31,8 +33,10 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 		));
 		$this->add(array(
 				'name' => 'Description',
-				'attribites' => array(
-						'type' => 'textarea'
+				'attributes' => array(
+					'type' => 'textarea',
+					'required' => 'required',
+					'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
 				),
 				'options' => array(
 						'label' => 'Description'
@@ -40,7 +44,7 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 		));
 		$this->add(array(
 				'name' => 'summery',
-				'attribites' => array(
+				'attributes' => array(
 						'type' => 'textarea'
 				),
 				'options' => array(
@@ -48,23 +52,18 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 				),
 		));
 		$this->add(array(
-				'name' => 'priority',
-				'attribites' => array(
-						'type' => 'select'
-				),
+        	'type' => 'Zend\Form\Element\Select',
+        	'name' => 'priority', 
+        	'options' => array( 
+                'label' => 'Priority', 
+        		'required' => 'required',
+        		'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$',
+        		'empty_option' => 'Select the priority',
+        	), 
 		));
 		$this->add(array(
 				'name' => 'summery',
-				'attribites' => array(
-						'type' => 'textarea'
-				),
-				'options' => array(
-						'label' => 'Summery'
-				),
-		));
-		$this->add(array(
-				'name' => 'summery',
-				'attribites' => array(
+				'attributes' => array(
 						'type' => 'textarea'
 				),
 				'options' => array(
@@ -73,7 +72,16 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 		));
 		$this->add(array(
 				'name' => 'summery',
-				'attribites' => array(
+				'attributes' => array(
+						'type' => 'textarea'
+				),
+				'options' => array(
+						'label' => 'Summery'
+				),
+		));
+		$this->add(array(
+				'name' => 'summery',
+				'attributes' => array(
 						'type' => 'textarea'
 				),
 				'options' => array(
@@ -82,27 +90,28 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 		));
 		$this->add(array(
 				'name' => 'submit',
-				'attribites' => array(
+				'attributes' => array(
 						'type' => 'submit',
 						'value' => 'Save',
 						'id'	=> 'submitbutton'
 				),
 		));
+		//$this->get('priority')->setValueOptions($this->initFormOptions());
+		$this->initFormOptions();
 	}
 	
 	public function initFormOptions() {
-		$this->get('priority')->setAttribute('options', array('hight' => 'High', 'low' => 'Low'));
+		var_dump($this->getServiceManager()->get('BugTable'));	
+	}
+	
+	public function setServiceManager(ServiceManager $serviceManager){
+		$this->serviceManager = $serviceManager;
 	}
 	
 	public function getServiceManager(){
 		if ( is_null($this->serviceManager) ) {
 			throw new \Exception('The ServiceManager has not been set.');
 		}
-	
 		return $this->serviceManager;
-	}
-	
-	public function setServiceManager(ServiceManager $serviceManager){
-		$this->serviceManager = $serviceManager;
 	}
 }

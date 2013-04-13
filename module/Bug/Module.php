@@ -29,7 +29,7 @@ class Module{
     		'factories' => array(
     			'Bug\Model\BugTable' => function($sm){
     				$tableGateway = $sm->get('BugTableGateway');
-    				$table= new BugTable($tableGateway);
+    				$table = new BugTable($tableGateway);
     				return $table;
     			},
     			'BugTableGateway' => function($sm){
