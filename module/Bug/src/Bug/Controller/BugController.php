@@ -33,16 +33,41 @@ class BugController extends AbstractActionController{
 		 return array('bugForm' => $bugForm);
 	}
 	
-	public function editAction($param) {
-		;
+	public function editAction() {
+		$id = (int) $this->params()->fromRoute($id, 0);
+		if(!$id){
+			return $this->redirect()->toRoute('Bug', 
+					array(
+						'action' => 'add'
+						));
+		}
+		$bug = $this->getBugTable()->getBug($id);
+		$form = new BugForm();
+		$form->bind($bug);
+		$form->get('submit')->setValue('value','Edit');
+		
+		$request = $this->getRequest();
+		if($request->isPost()){
+			$form->setInputFilter($bug->getInputFilter());
+			$form->setData($request->getPost());
+			if($form->isValid()){
+				$this->getBugTable()->saveBug($form->getData());
+				return $this->toRoute();
+			}
+		}
+		return array(
+				'id' 	=> $id,
+				'form' 	=> $form
+				);
 	}
 	
 	public function deletedAction(){
-		
+		$request = $this->getRequest();
+		$this->getBugTable()->deleted($request);
 	}
 	
-	public function userbugsAction($param) {
-		;
+	public function userbugsAction() {
+		
 	}
 	
 	public function getBugTable() {

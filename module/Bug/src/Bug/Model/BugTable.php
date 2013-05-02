@@ -11,15 +11,15 @@ class BugTable {
 	}
 	
 	public function fetchAll() {
-		$resultSet = $this->tableGateway->select ();
+		$resultSet = $this->tableGateway->select();
 		return $resultSet;
 	}
 	
 	public function getBug($id) {
-		$id = ( int ) $id;
-		$rowset = $this->tableGateway->select ( array ('id' => $id ) );
-		$row = $rowset->current ();
-		if (! $row) {
+		$id = (int)$id;
+		$rowset = $this->tableGateway->select(array('id'=>$id));
+		$row = $rowset->current();
+		if (!$row){
 			throw new Exception ( "Could not find bug with id " . $id );
 		}
 		return $row;
