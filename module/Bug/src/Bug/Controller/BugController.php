@@ -62,8 +62,13 @@ class BugController extends AbstractActionController{
 	}
 	
 	public function deletedAction(){
-		$request = $this->getRequest();
-		$this->getBugTable()->deleted($request);
+		$id = (int) $this->params()->fromRoute($id,0);
+		if(!$id){
+			return $this->redirect()->toRoute(
+					'Bug', array('action','bug')
+					);
+		}
+		$this->getBugTable()->deleted($id);
 	}
 	
 	public function userbugsAction() {

@@ -43,6 +43,10 @@ class Bug implements InputFilterAwareInterface{
 		$this->files			=	(isset($data['files'])) ? $data['files'] : null;
 	}
 	
+	public function getCopyArray(){
+		return get_object_vars($this);
+	}
+	
 	public function setInputFilter(InputFilterInterface $inputFilter){
 		throw new \Exception("Not Used");
 	}
