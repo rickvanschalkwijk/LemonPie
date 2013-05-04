@@ -1,6 +1,8 @@
 <?php
 namespace Bug\Controller;
 
+use Zend\Mvc\Controller\Plugin\Redirect;
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Bug\Model\Bug;
@@ -59,17 +61,31 @@ class BugController extends AbstractActionController{
 		return array(
 				'id' 	=> $id,
 				'form' 	=> $form
-				);
+		);
 	}
 	
 	public function deletedAction(){
 		$id = (int) $this->params()->fromRoute($id,0);
 		if(!$id){
 			return $this->redirect()->toRoute(
-					'Bug', array('action','bug')
-					);
+					'Bug', array(
+							'action',
+							'bug'
+					));
 		}
-		$this->getBugTable()->deleted($id);
+		$request = $this->getRequest();
+		if($request->isPost()){
+			$boolConferm = $request->getPost('del', 'No');
+			if($boolConferm == 'Yes'){
+				$id = $request->getPost('id');
+				$this->getBugTable()->delete($id);
+			}
+			return $this->redirect()->toRoute('bug');
+		}
+		return array(	
+				'id' => $id, 
+				'bug' => $this->getBugTable()->getBug($id)
+		);
 	}
 	
 	public function userbugsAction() {
