@@ -55,6 +55,7 @@ class BugController extends AbstractActionController{
 				return $this->toRoute();
 			}
 		}
+		
 		return array(
 				'id' 	=> $id,
 				'form' 	=> $form
