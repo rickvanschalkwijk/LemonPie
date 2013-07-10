@@ -1,6 +1,8 @@
 <?php
 namespace Bug\Form;
 
+use Zend\Form\Element;
+
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
@@ -28,64 +30,36 @@ class BugForm extends Form implements ServiceManagerAwareInterface{
 					'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
 				),
 				'options' => array(
-					'label' => 'Name'
-				),
-		));
-		$this->add(array(
-				'name' => 'Description',
-				'attributes' => array(
-					'type' => 'textarea',
-					'required' => 'required',
-					'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$'
-				),
-				'options' => array(
-						'label' => 'Description'
-				),
-		));
-		$this->add(array(
-				'name' => 'summery',
-				'attributes' => array(
-						'type' => 'textarea'
-				),
-				'options' => array(
-						'label' => 'Summery'
+					'label' => 'Name: '
 				),
 		));
 		$this->add(array(
         	'type' => 'Zend\Form\Element\Select',
         	'name' => 'priority', 
         	'options' => array( 
-                'label' => 'Priority', 
+                'label' => 'Priority: ', 
         		'required' => 'required',
         		'pattern'  => '^0[1-68]([-. ]?[0-9]{2}){4}$',
         		'empty_option' => 'Select the priority',
+        		'value_options' => array(
+        					'1' => 'High',
+        					'2' => 'Medium',
+        					'3' => 'Low'
+        				)
         	), 
 		));
 		$this->add(array(
-				'name' => 'summery',
-				'attributes' => array(
-						'type' => 'textarea'
-				),
+				'type' => 'Zend\Form\Element\Textarea',
+				'name' => 'description',
 				'options' => array(
-						'label' => 'Summery'
+						'label' => 'Description: '
 				),
 		));
 		$this->add(array(
+				'type' => 'Zend\Form\Element\Textarea',
 				'name' => 'summery',
-				'attributes' => array(
-						'type' => 'textarea'
-				),
 				'options' => array(
-						'label' => 'Summery'
-				),
-		));
-		$this->add(array(
-				'name' => 'summery',
-				'attributes' => array(
-						'type' => 'textarea'
-				),
-				'options' => array(
-						'label' => 'Summery'
+						'label' => 'Summery: '
 				),
 		));
 		$this->add(array(

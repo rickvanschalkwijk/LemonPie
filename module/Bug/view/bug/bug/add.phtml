@@ -11,5 +11,7 @@ echo $this->form()->openTag($form);
 echo $this->formHidden($form->get('id'));
 echo $this->formRow($form->get('name'));
 echo $this->formRow($form->get('priority'));
+echo $this->formRow($form->get('description'));
+echo $this->formRow($form->get('summery'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
