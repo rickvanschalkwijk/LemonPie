@@ -25,6 +25,11 @@ class BugTable {
 		return $row;
 	}
 	
+	public function countBugs(){
+		$bugs = $this->fetchAll();
+		return count($bugs);
+	}
+	
 	public function saveBug(Bug $bug) {
 		$data =  array(
 					$this->id				=>	$bug->id,

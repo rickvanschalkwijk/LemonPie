@@ -20,6 +20,8 @@ class IndexController extends AbstractActionController{
     	if (!$this->zfcUserAuthentication()->hasIdentity()) {
     		return $this->redirect()->toRoute('user/login');
     	}
+    	$bug = new BugTable();
+    	$bug->countBugs();
         return new ViewModel();
     }
 }
